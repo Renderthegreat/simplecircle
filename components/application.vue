@@ -1,5 +1,5 @@
 <script setup>
-	import imgIcon from "../../public/icons/icon.svg"
+	import imgIcon from "../public/icons/icon.svg"
 </script>
 <template>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
