@@ -26,14 +26,14 @@
 					" id="menu-button"></button>
 				<div id="dropdown-content" style="display: none;" class="dropdown-content">
 					<v-if v-if="isLoggedIn">
-						<a href="settings"></a>
+						
 					</v-if>
 					<v-if v-if="!isLoggedIn">
 						<a href="auth">Login</a>
 					</v-if>
 					
 					<a href="/settings">Settings</a>
-					<a href="#">Link 3</a>
+					<a href="#">Coming soon</a>
 				</div>
 			</div>
 		</div>
