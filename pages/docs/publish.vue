@@ -59,3 +59,13 @@ export default {
 	}
 };
 </script>
+
+<style>
+	text-area {
+		width: 200px;
+		height: 100px;
+		border-radius: 10px;
+		border: 1px solid #efefef;
+		padding: 0px 10px;
+	}
+</style>
