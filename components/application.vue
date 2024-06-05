@@ -29,11 +29,12 @@
 						
 					</v-if>
 					<v-if v-if="!isLoggedIn">
-						<a href="auth">Login</a>
+						<a href="/auth">Login</a>
 					</v-if>
 					
 					<a href="/settings">Settings</a>
-					<a href="#">Coming soon</a>
+					<a href="/docs/publish">Publish</a>
+					<a href="/docs/read">Read</a>
 				</div>
 			</div>
 		</div>

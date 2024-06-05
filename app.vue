@@ -3,6 +3,23 @@
 </template>
 
 <style>
+	input {
+		width: 200px;
+		height: 40px;
+		border-radius: 10px;
+		border: 1px solid #efefef;
+		padding: 0px 10px;
+	}
+
+	button {
+		border-radius: 10px;
+		padding: 10px;
+		background-color: var(--rlc-color);
+		border-width: 0px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	
 	.auth-container {
 		display: flex;
 		border-radius: 10px;

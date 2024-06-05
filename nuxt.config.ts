@@ -1,7 +1,10 @@
 export default defineNuxtConfig({
-	"devtools": { "enabled": true },
-	"routeRules": {
-		"/": { "prerender": true },
+	devtools: { enabled: true },
+	routeRules: {
+		"/": { prerender: true },
 	},
-	'pages': true,
+	generate: {
+		fallback: true,
+	},
+	pages: true,
 });

@@ -9,8 +9,10 @@
 		<input type="password" placeholder="Password" id="password" />
 		<button onclick="
 			async function login() {
+				let status = document.getElementById('status');
 				let email = document.getElementById('email').value;
 				let password = document.getElementById('password').value;
+				status.innerHTML = 'Logging in...';
 				const response = await (await fetch('https://renderlabs.cloud/api/v1/auth/login', {
 					method: 'POST',
 					body: JSON.stringify({
@@ -43,9 +45,13 @@
 						window.location.href = '/';
 					}
 				}
+				else {
+					status.innerHTML = 'Incorrect username or password.';
+				}
 			}
 			login()
 			" id="login">Login</button>
+		<p id="status"></p>
 	</div>
 </template>
 
