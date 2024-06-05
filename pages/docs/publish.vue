@@ -61,7 +61,7 @@ export default {
 </script>
 
 <style>
-	text-area {
+	textarea {
 		width: 200px;
 		height: 100px;
 		border-radius: 10px;
