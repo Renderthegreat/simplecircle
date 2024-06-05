@@ -33,7 +33,7 @@ export default {
 				URI: "",
 				token: ""
 			},
-			token: localStorage.getItem('token') || ""
+			token: ""
 		};
 	},
 	methods: {

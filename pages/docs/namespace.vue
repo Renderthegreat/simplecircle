@@ -19,7 +19,7 @@ export default {
 			namespaceForm: {
 				URI: "",
 			},
-			token: localStorage.getItem('token') || ""
+			token: ""
 		};
 	},
 	methods: {
