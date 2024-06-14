@@ -10,9 +10,9 @@
 	<div id="app">
 		<div id="header">
 			<img :src="imgIcon" id="logo"/>
-			<a href="/" class="logo-text">
+			<nuxt-link to="/" class="logo-text">
 				<h1 class="logo-text">Simple Circle</h1>
-			</a>
+			</nuxt-link>
 
 			<div class="dropdown">
 				<button onclick="
@@ -29,12 +29,11 @@
 						
 					</v-if>
 					<v-if v-if="!isLoggedIn">
-						<a href="/auth">Login</a>
+						<nuxt-link to="/auth">Login</nuxt-link>
 					</v-if>
 					
-					<a href="/settings">Settings</a>
-					<a href="/docs/publish">Publish</a>
-					<a href="/docs/read">Read</a>
+					<nuxt-link to="/settings">Settings</nuxt-link>
+					<nuxt-link to="/docs/publish">Publish</nuxt-link>
 				</div>
 			</div>
 		</div>
@@ -47,15 +46,17 @@
 
 <style>
 	:root {
-		--bg-color: #fafeff;
+		--bg-color: #ffffff;
 		--bg-color-low: #efefef;
 		--text-color: #21212b;
 		--rlc-color: #2c974b;
+		--accent-color: #007bff;
+		--accent-color-hover: #0056b3;
 	}
 	
 	#header {
-		background-color: #3b65ed;
-		color: #fff;
+		background-color: #3b45ed;
+		color: #ffffff;
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -76,20 +77,16 @@
 		align-items: center;
 	}
 	
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6,
-	p,
-	a,
-	button,
-	input,
-	textarea,
-	select {
+	* {
 		font-family: "Pixelify Sans", sans-serif;
 		color: var(--text-color);
+		outline: none;
+	}
+
+	input {
+		background-color: var(--bg-color-low);
+		border: none;
+		-webkit-appearance: none;
 	}
 		
 	#menu-button {
@@ -131,7 +128,7 @@
 	
 	.logo-text {
 		text-decoration: none;
-		color: var(--bg-color);
+		color: #ffffff;
 	}
 	
 	#main {
@@ -157,14 +154,13 @@
 	}
 	
 	.dropdown-content a {
-		color: black;
 		padding: 12px 16px;
 		text-decoration: none;
 		display: block;
 	}
 	
 	.dropdown-content a:hover {
-		background-color: #f1f1f1;
+		background-color: var(--bg-color-low);
 		border-radius: 10px;
 	}
 

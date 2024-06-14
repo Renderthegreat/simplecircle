@@ -4,8 +4,6 @@
 		<form @submit.prevent="createNamespace">
 			<label>URI:</label>
 			<input type="text" v-model="namespaceForm.URI" required><br>
-			<label>Token:</label>
-			<input type="text" :value="token" readonly><br>
 			<button type="submit">Create Namespace</button>
 			<p id="status"></p>
 		</form>
@@ -44,3 +42,8 @@ export default {
 	}
 };
 </script>
+<style>
+button {
+	margin-top: 10px;
+}
+</style>

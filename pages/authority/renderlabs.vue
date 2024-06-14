@@ -13,11 +13,12 @@
 				let email = document.getElementById('email').value;
 				let password = document.getElementById('password').value;
 				status.innerHTML = 'Logging in...';
+				
 				const response = await (await fetch('https://renderlabs.cloud/api/v1/auth/login', {
 					method: 'POST',
 					body: JSON.stringify({
-						email: email,
-						password: password
+						email: (email.toLowerCase()),
+						password: (password)
 					}),
 				})).json();
 				const token = JSON.parse(response.responseJson).token;
@@ -75,8 +76,8 @@ input {
 	width: 200px;
 	height: 40px;
 	border-radius: 10px;
-	border: 1px solid #efefef;
-	padding: 0px 10px;
+	border: 1px solid var(---bg-color-low);
+	padding: 2px 10px;
 }
 
 #login {

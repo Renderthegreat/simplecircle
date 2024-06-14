@@ -2,6 +2,11 @@
 	<application></application>
 </template>
 
+<script>
+	import { locateTheme } from './javascript/locate.js';
+	locateTheme();
+</script>
+
 <style>
 	input {
 		width: 200px;
@@ -25,16 +30,19 @@
 		border-radius: 10px;
 		background-color: var(--bg-color-low);
 		margin-left: 10%;
+		padding: 20px;
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
 		width: 80vw;
 		height: 80vh;
 	}
+	
 	.rlc-icon {
 		height: 20px;
 		width: 20px;
 	}
+	
 	.rlc-icon-large {
 		height: 60px;
 		width: 60px;

@@ -1,7 +1,7 @@
 <template>
 	<h1>Welcome to Simple Circle XYZ</h1>
 	<p>Simple Circle XYZ is a platform for documentation on anything.</p>
-	<p>Coming soon.</p>
+	<div id="trending"></div>
 </template>
 
 <style>
