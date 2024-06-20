@@ -4,7 +4,7 @@
 
 <script>
 	import { locateTheme } from './javascript/locate.js';
-	locateTheme();
+	locateTheme("");
 </script>
 
 <style>
