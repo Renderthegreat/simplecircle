@@ -25,7 +25,7 @@ import imgIcon from "../public/icons/icon.svg"
 					dropdownButton.style.borderRadius = dropdownButton.style.borderRadius !== '10px' ? '10px' : '10px 10px 0px 0px';
 					" id="menu-button"></button>
 				<div id="dropdown-content" style="display: none;" class="dropdown-content">
-					<input type="input" id="search-mini" placeholder="Search..." @change="this.search()" />
+					<input type="input" id="search-mini" placeholder="Search..." @change="search()" />
 					<v-if v-if="isLoggedIn">
 
 					</v-if>
