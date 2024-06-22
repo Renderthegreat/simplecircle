@@ -45,11 +45,15 @@ export default {
 					URI: this.$route.hash.split(".")[0].replace('#', ''),
 					name: this.$route.hash.split(".")[1]
 				};
+				
 				const response = await fetch("https://simplecircle.xyz/api/v1/docs/get", {
 					method: "POST",
 					body: JSON.stringify(kplace)
 				});
-				const data = (await response.json()).doc;
+				let data = (await response.json());
+				console.log(data)
+				data = data.doc;
+				
 				if (data) {
 					document.getElementById("name").innerHTML = kplace.name;
 					document.getElementById("description").innerHTML = "description: " + data.description;
@@ -69,7 +73,7 @@ export default {
 			}
 		},
 		async editDocument() {
-			window.location.href = '/docs/publish' + this.$route.hash;
+			this.$router.push('/docs/publish' + this.$route.hash)
 		},
 		async getVotes() {
 			var response = await fetch("https://simplecircle.xyz/api/v1/docs/vote", {
@@ -184,6 +188,7 @@ span {
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	padding: 10px;
 	border-radius: 10px;
+	display: inline-block;
 }
 
 #status #name,

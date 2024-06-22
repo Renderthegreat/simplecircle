@@ -1,4 +1,4 @@
-<script setup>
+{<script setup>
 import imgIcon from "../public/icons/icon.svg"
 </script>
 
@@ -192,7 +192,7 @@ export default {
 	},
 	methods: {
 		search() {
-			window.location.href = `/docs/search?query=${document.getElementById("search-mini").value}`;
+			this.$router.push(`/docs/search?query=${document.getElementById("search-mini").value}`);
 		}
 	}
 }
