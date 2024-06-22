@@ -110,8 +110,8 @@ export default {
 	width: 18px;
 	height: 18px;
 	border-radius: 50%;
-	top: 1px;
-	left: 1px;
+	top: 0.5px;
+	left: 0px;
 	background: white;
 	transition: transform 0.3s;
 }

@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="interface">
 		<h2>Publish Document</h2>
 		<form @submit.prevent="publishDocument">
 			<label>Name:</label>
@@ -14,7 +14,7 @@
 			<textarea v-model="publishForm.content" id="content" @change="contentChange()" required></textarea><br>
 			<button type="submit">Publish</button>
 			<p id="status"></p>
-			<p>You will need a <nuxt-link to="/docs/namespace">namespace</nuxt-link> to publish</p>
+			<p>You will need to own a <nuxt-link to="/docs/namespace">namespace</nuxt-link> to publish.</p>
 		</form>
 	</div>
 </template>

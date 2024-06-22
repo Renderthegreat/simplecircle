@@ -47,4 +47,14 @@
 		height: 60px;
 		width: 60px;
 	}
+
+	.interface {
+		margin: 80px;
+		margin-top: 120px;
+	}
+
+	.page {
+		margin: 80px;
+		margin-top: 120px;
+	}
 </style>

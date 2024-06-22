@@ -14,6 +14,6 @@
     <!-- Centered CS with shadow -->
     <text x="100" y="135" font-family="Arial" font-size="100" font-weight="bold" fill="white" text-anchor="middle">
         <tspan fill-opacity="0.3">S</tspan>
-        <tspan fill="white">C</tspan>
+        <tspan fill-opacity="0.8">C</tspan>
     </text>
 </svg>

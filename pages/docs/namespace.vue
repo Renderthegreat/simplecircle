@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="interface">
 		<h2>Create Namespace</h2>
 		<form @submit.prevent="createNamespace">
 			<label>URI:</label>
@@ -29,10 +29,10 @@ export default {
 					body: JSON.stringify(this.namespaceForm)
 				});
 				const data = await response.json();
-				if(data.error&&data.error==="a+Namespace taken") {
+				if (data.error && data.error === "a+Namespace taken") {
 					document.getElementById('status').innerHTML = data.error;
 				}
-				else if(!data.error) {
+				else if (!data.error) {
 					document.getElementById('status').innerHTML = "Namespace created.";
 				}
 			} catch (error) {

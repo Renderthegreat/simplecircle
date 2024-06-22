@@ -1,6 +1,7 @@
 <script setup>
-	import imgIcon from "../public/icons/icon.svg"
+import imgIcon from "../public/icons/icon.svg"
 </script>
+
 <template>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -9,11 +10,10 @@
 		rel="stylesheet">
 	<div id="app">
 		<div id="header">
-			<img :src="imgIcon" id="logo"/>
+			<img :src="imgIcon" id="logo" />
 			<nuxt-link to="/" class="logo-text">
 				<h1 class="logo-text">Simple Circle</h1>
 			</nuxt-link>
-
 			<div class="dropdown">
 				<button onclick="
 					const dropdownContent = document.getElementById('dropdown-content');
@@ -25,13 +25,13 @@
 					dropdownButton.style.borderRadius = dropdownButton.style.borderRadius !== '10px' ? '10px' : '10px 10px 0px 0px';
 					" id="menu-button"></button>
 				<div id="dropdown-content" style="display: none;" class="dropdown-content">
+					<input type="input" id="search-mini" placeholder="Search..." @change="this.search()" />
 					<v-if v-if="isLoggedIn">
-						
+
 					</v-if>
 					<v-if v-if="!isLoggedIn">
 						<nuxt-link to="/auth">Login</nuxt-link>
 					</v-if>
-					
 					<nuxt-link to="/settings">Settings</nuxt-link>
 					<nuxt-link to="/docs/publish">Publish</nuxt-link>
 				</div>
@@ -45,144 +45,155 @@
 </template>
 
 <style>
-	:root {
-		--bg-color: #ffffff;
-		--bg-color-low: #efefef;
-		--text-color: #21212b;
-		--rlc-color: #2c974b;
-		--accent-color: #007bff;
-		--accent-color-hover: #0056b3;
-	}
-	
-	#header {
-		background-color: #3b45ed;
-		color: #ffffff;
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 70px;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-		
-	body {
-		background-color: var(--bg-color);
-	}
-		
-	body,
-	div {
-		margin: 0;
-		align-items: center;
-	}
-	
-	* {
-		font-family: "Pixelify Sans", sans-serif;
-		color: var(--text-color);
-		outline: none;
-	}
+:root {
+	--bg-color: #ffffff;
+	--bg-color-low: #efefef;
+	--text-color: #21212b;
+	--rlc-color: #2c974b;
+	--accent-color: #007bff;
+	--accent-color-hover: #0056b3;
+}
 
-	input {
-		background-color: var(--bg-color-low);
-		border: none;
-		-webkit-appearance: none;
-	}
-		
-	#menu-button {
-		color: var(--bg-color);
-		background-color: #3039e3;
-		border-color: transparent;
-		border-width: 0;
-		width: 40px;
-		height: 40px;
-		border-radius: 10px;
-		position: relative;
-		cursor: pointer;
-		margin-left: auto;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	
-	#menu-button::before,
-	#menu-button::after {
-		content: "";
-		position: absolute;
-		left: 50%;
-		background-color: currentColor;
-		width: 60%;
-		height: 4px;
-		border-radius: 2px;
-	}
-	
-	#menu-button::before {
-		top: 36%;
-		transform: translateX(-50%);
-	}
-	
-	#menu-button::after {
-		top: 56%;
-		transform: translateX(-50%);
-	}
-	
-	.logo-text {
-		text-decoration: none;
-		color: #ffffff;
-	}
-	
-	#main {
-		margin-top: 70px;
-	}
-	
-	.dropdown {
-		position: relative;
-		display: inline-block;
-		padding-right: 10px;
-		margin-left: auto;
-	}
-	
-	.dropdown-content {
-		position: absolute;
-		background-color: var(--bg-color);
-		border-radius: 10px 0px 10px 10px;
-		min-width: 160px;
-		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-		z-index: 1;
-		margin-left: -120px;
-		display: none;
-	}
-	
-	.dropdown-content a {
-		padding: 12px 16px;
-		text-decoration: none;
-		display: block;
-	}
-	
-	.dropdown-content a:hover {
-		background-color: var(--bg-color-low);
-		border-radius: 10px;
-	}
+#header {
+	background-color: #3b45ed;
+	color: #ffffff;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 70px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
 
-	#logo {
-		border-radius: 20px;
-		margin-right: 10px;
-		margin-left: 10px;
-		border-color: black;
-		border-width: 10px;
-		height: 50px;
-	}
+body {
+	background-color: var(--bg-color);
+}
+
+body,
+div {
+	margin: 0;
+	align-items: center;
+}
+
+* {
+	font-family: "Pixelify Sans", sans-serif;
+	color: var(--text-color);
+	outline: none;
+}
+
+input {
+	background-color: var(--bg-color-low);
+	border: none;
+	-webkit-appearance: none;
+}
+
+#menu-button {
+	color: var(--bg-color);
+	background-color: #3039e3;
+	border-color: transparent;
+	border-width: 0;
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	position: relative;
+	cursor: pointer;
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#menu-button::before,
+#menu-button::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	background-color: currentColor;
+	width: 60%;
+	height: 4px;
+}
+
+#menu-button::before {
+	top: 36%;
+	transform: translateX(-50%);
+}
+
+#menu-button::after {
+	top: 56%;
+	transform: translateX(-50%);
+}
+
+.logo-text {
+	text-decoration: none;
+	color: #ffffff;
+}
+
+#main {
+	margin-top: 70px;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+	padding-right: 10px;
+	margin-left: auto;
+}
+
+.dropdown-content {
+	position: absolute;
+	background-color: var(--bg-color);
+	border-radius: 10px 0px 10px 10px;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+	margin-left: -120px;
+	display: none;
+}
+
+.dropdown-content a {
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: var(--bg-color-low);
+}
+
+.dropdown-content #search-mini {
+	padding: 12px 8px;
+	text-decoration: none;
+	display: block;
+	border-radius: 10px 0px 0px 0px;
+}
+
+
+#logo {
+	border-radius: 20px;
+	margin-right: 10px;
+	margin-left: 10px;
+	border-color: black;
+	border-width: 10px;
+	height: 50px;
+}
 </style>
 
 <script>
-	export default {
-		data() {
-			return {
-				isLoggedIn: false,
-			};
-		},
-		mounted() {
-			this.isLoggedIn = !!localStorage.getItem("token");
-		},
+export default {
+	data() {
+		return {
+			isLoggedIn: false,
+		};
+	},
+	mounted() {
+		this.isLoggedIn = !!localStorage.getItem("token");
+	},
+	methods: {
+		search() {
+			window.location.href = `/docs/search?query=${document.getElementById("search-mini").value}`;
+		}
 	}
+}
 </script>
