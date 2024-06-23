@@ -74,13 +74,15 @@ body {
 body,
 div {
 	margin: 0;
+	padding: 0;
 	align-items: center;
 }
 
 * {
-	font-family: "Pixelify Sans", sans-serif;
+	font-family: "Roboto", sans-serif;
 	color: var(--text-color);
 	outline: none;
+	
 }
 
 input {
@@ -167,6 +169,8 @@ input {
 	text-decoration: none;
 	display: block;
 	border-radius: 10px 0px 0px 0px;
+	background-color: var(--bg-color);
+	border: none;
 }
 
 

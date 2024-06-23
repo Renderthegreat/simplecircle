@@ -2,8 +2,7 @@
 	<div class="interface">
 		<h2>Create Namespace</h2>
 		<form @submit.prevent="createNamespace">
-			<label>URI:</label>
-			<input type="text" v-model="namespaceForm.URI" required><br>
+			<input type="text" v-model="namespaceForm.URI" placeholder="Namespace"  required><br>
 			<button type="submit">Create Namespace</button>
 			<p id="status"></p>
 		</form>

@@ -1,11 +1,11 @@
 <template>
-	<div id="settings">
+	<div id="bottom-settings">
 		<div class="theme-switch">
 			<label for="theme-toggle">Theme:</label>
-			<input type="checkbox" @onload="onThemeLoad()" @change="toggleTheme()" id="theme-toggle">
+			<input type="checkbox" @change="toggleTheme" id="theme-toggle">
 			<span class="slider"></span>
 		</div>
-		<button id="logout-btn" @click="logout()" aria-label="Logout">Logout</button>
+		<button id="logout-btn" @click="logout" aria-label="Logout">Logout</button>
 	</div>
 </template>
 
@@ -13,29 +13,28 @@
 import { locateTheme } from '../javascript/locate.js';
 
 export default {
+	data() {
+		return {
+			initialLoad: true
+		};
+	},
 	mounted() {
 		const themeToggle = document.getElementById('theme-toggle');
 		const currentTheme = localStorage.getItem('theme');
 		if (currentTheme === 'dark') {
 			themeToggle.checked = true;
 		}
+		this.initialLoad = false;
 	},
 	methods: {
 		toggleTheme() {
 			const themeToggle = document.getElementById('theme-toggle');
-			const currentTheme = localStorage.getItem('theme');
-			if (currentTheme === 'dark') {
-				themeToggle.checked = true;
-				themeToggle.long = true;
+			const newTheme = themeToggle.checked ? 'dark' : 'light';
+			localStorage.setItem('theme', newTheme);
+			console.log(`Theme is now ${newTheme.charAt(0).toUpperCase() + newTheme.slice(1)}`);
+			if (!this.initialLoad) {
+				locateTheme();
 			}
-
-			console.log('Theme toggle clicked');
-			if (themeToggle.checked&&!themeToggle.long) {
-				localStorage.setItem('theme', 'dark');
-			} else {
-				localStorage.setItem('theme', 'light');
-			}
-			window.location.href = '/settings';
 		},
 		logout() {
 			localStorage.removeItem('token');
@@ -46,7 +45,7 @@ export default {
 </script>
 
 <style>
-#settings {
+#bottom-settings {
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -58,7 +57,7 @@ export default {
 	background-color: var(--bg-color-low);
 }
 
-#settings button {
+#bottom-settings button {
 	padding: 10px 20px;
 	font-size: 16px;
 	cursor: pointer;
@@ -69,18 +68,17 @@ export default {
 	transition: background-color 0.3s;
 }
 
-#settings button:hover {
+#bottom-settings button:hover {
 	background-color: var(--accent-color-hover);
 }
 
-#settings button:focus {
+#bottom-settings button:focus {
 	outline: none;
 	box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
 .theme-switch {
 	display: flex;
-	align-items: center;
 }
 
 .theme-switch label {

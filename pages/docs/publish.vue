@@ -1,28 +1,37 @@
 <template>
-	<div class="interface">
-		<h2>Publish Document</h2>
-		<form @submit.prevent="publishDocument">
-			<label>Name:</label>
-			<input type="text" v-model="publishForm.name" required><br>
-			<label>Description:</label>
-			<input type="text" v-model="publishForm.description" required><br>
-			<label>Tags:</label>
-			<input type="text" v-model="publishForm.tags" required><br>
-			<label>Namespace:</label>
-			<input type="text" v-model="publishForm.URI" required><br>
-			<p id="display-content">Enter HTML to start</p><br>
-			<textarea v-model="publishForm.content" id="content" @change="contentChange()" required></textarea><br>
-			<button type="submit">Publish</button>
-			<p id="status"></p>
-			<p>You will need to own a <nuxt-link to="/docs/namespace">namespace</nuxt-link> to publish.</p>
-		</form>
-	</div>
+	<transition name="page" mode="out-in">
+		<div class="interface">
+			<h2>Publish Document</h2>
+			<form @submit.prevent="publishDocument">
+				<input v-model="publishForm.name" placeholder="Name" required /><br>
+
+				<input v-model="publishForm.description" placeholder="Description" required /><br>
+
+				<TagEditor v-model="publishForm.tags" required /><br>
+
+				<input v-model="publishForm.URI" placeholder="URI" required /><br>
+				<div class="ql-editor" id="viewer" />
+				<QuillEditor v-model="publishForm.content" /><br>
+
+				<button type="submit">Publish</button>
+				<p id="status"></p>
+				<p>You will need to own a <nuxt-link to="/docs/namespace">namespace</nuxt-link> to publish.</p>
+			</form>
+		</div>
+	</transition>
 </template>
 
 <script>
+import QuillEditor from '@/components/QuillEditor.vue';
+import TagEditor from '@/components/tagInput.vue';
+
 export default {
+	components: {
+		QuillEditor,
+		TagEditor
+	},
 	async mounted() {
-		if(this.$route.hash) {
+		if (this.$route.hash) {
 			const kplace = {
 				URI: this.$route.hash.split(".")[0].replace('#', ''),
 				name: this.$route.hash.split(".")[1]
@@ -32,22 +41,26 @@ export default {
 				body: JSON.stringify(kplace)
 			});
 			const data = (await response.json()).doc;
-			if(data) {
+			if (data) {
 				this.publishForm.name = kplace.name;
 				this.publishForm.description = data.description;
 				this.publishForm.tags = data.tags;
-				this.publishForm.content = data.content
+				console.log(data);
+				this.publishForm.content.update(data.content);
 				this.publishForm.URI = kplace.URI;
 			}
 		}
+		setInterval(() => {
+			this.contentChange()
+		}, 100)
 	},
 	data() {
 		return {
 			publishForm: {
 				name: "",
 				description: "",
-				tags: "",
-				content: "",
+				tags: [],
+				content: {},
 				URI: "",
 				token: ""
 			},
@@ -58,44 +71,61 @@ export default {
 		async publishDocument() {
 			try {
 				this.publishForm.token = localStorage.getItem('token');
-				
+				if (typeof this.publishForm.tags === "object") this.publishForm.tags = this.publishForm.tags.join(', ').replace(/\s+/g, '_')
+				let formData = {};
+				for (let item in this.publishForm) {
+					formData[item] = this.publishForm[item];
+				}
+				console.log(JSON.stringify(formData))
 				const response = await fetch("https://simplecircle.xyz/api/v1/docs/publish", {
 					method: "POST",
-					body: JSON.stringify(this.publishForm)
+					body: JSON.stringify(formData)
 				});
+
 				const data = await response.json();
-				console.log(data);
-				if(data.error&&data.error==="a+Access Denied") {
+				if (data.error && data.error === "a+Access Denied") {
 					document.getElementById('status').innerHTML = "You do not own this namespace.";
-				} else if(!data.error) {
+				} else if (!data.error) {
 					document.getElementById('status').innerHTML = "Document published.";
 				}
 			} catch (error) {
+				console.log(error)
 				document.getElementById('status').innerHTML = "Fetch error.";
 			}
 		},
 		contentChange() {
-			let content = document.getElementById('content').value;
-			let display = document.getElementById('display-content');
-			display.innerHTML = content;
+			let display = document.getElementById('viewer');
+			let passthrough = this.publishForm.content;
+			if (!passthrough.html) return
+			if (display.innerHTML != passthrough.html) {
+				this.publishForm.content = passthrough.html;
+			}
+			display.innerHTML = passthrough.html;
 		}
 	}
 };
 </script>
 
-<style>
-	textarea {
-		width: 200px;
-		height: 100px;
-		border-radius: 10px;
-		border: 1px solid var(---bg-color-low);
-		color: black;
-		outline: none;
-		padding: 0px 10px;
-	}
-	input {
-		border: 1px solid var(---bg-color-low);
-		background-color: var(--bg-color-low);
-		color: var(--text-color);
-	}
+<style scoped>
+textarea {
+	width: 200px;
+	height: 100px;
+	border-radius: 10px;
+	border: 1px solid var(--bg-color-low);
+	color: black;
+	outline: none;
+	padding: 0px 10px;
+}
+
+input {
+	border: 1px solid var(--bg-color-low);
+	background-color: var(--bg-color-low);
+	color: var(--text-color);
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+#viewer {
+	border: 1px solid var(--bg-color-low);
+}
 </style>
