@@ -23,7 +23,7 @@ export default {
 		async createNamespace() {
 			try {
 				this.namespaceForm.token = localStorage.getItem('token');
-				const response = await fetch("https://simplecircle.xyz/api/v1/docs/namespace", {
+				const response = await window.fetchSecure("https://simplecircle.xyz/api/v1/docs/namespace", {
 					method: "POST",
 					body: JSON.stringify(this.namespaceForm)
 				});

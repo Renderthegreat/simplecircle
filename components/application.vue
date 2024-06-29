@@ -1,4 +1,4 @@
-{<script setup>
+<script setup>
 import imgIcon from "../public/icons/icon.svg"
 </script>
 
@@ -39,7 +39,9 @@ import imgIcon from "../public/icons/icon.svg"
 		</div>
 		<div id="main">
 			<!-- Main -->
-			<NuxtPage></NuxtPage>
+			<transition name="blur" mode="out-in">
+				<SPage />
+			</transition>
 		</div>
 	</div>
 </template>
@@ -82,7 +84,7 @@ div {
 	font-family: "Roboto", sans-serif;
 	color: var(--text-color);
 	outline: none;
-	
+
 }
 
 input {
@@ -188,7 +190,7 @@ input {
 export default {
 	data() {
 		return {
-			isLoggedIn: false,
+			isLoggedIn: false
 		};
 	},
 	mounted() {
@@ -197,7 +199,7 @@ export default {
 	methods: {
 		search() {
 			this.$router.push(`/docs/search?query=${document.getElementById("search-mini").value}`);
-		}
+		},
 	}
 }
 </script>

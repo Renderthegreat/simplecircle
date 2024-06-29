@@ -1,6 +1,35 @@
-.page-enter-active, .page-leave-active {
-  transition: opacity 0.5s;
+.grid-blur-enter-active, .grid-blur-leave-active {
+  position: relative;
 }
-.page-enter, .page-leave-to {
+
+.grid-blur-enter, .grid-blur-leave-to {
   opacity: 0;
+}
+
+.grid-blur-enter-active .grid, .grid-blur-leave-active .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.grid-blur-enter-active .grid div, .grid-blur-leave-active .grid div {
+  width: 100%;
+  height: 100%;
+  transition: filter 0.5s;
+  animation: blurEffect 1s ease forwards;
+}
+
+@keyframes blurEffect {
+  0%, 100% {
+	 filter: blur(0);
+  }
+  50% {
+	 filter: blur(10px);
+  }
 }

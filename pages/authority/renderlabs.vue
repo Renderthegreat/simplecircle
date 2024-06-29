@@ -14,7 +14,7 @@
 				let password = document.getElementById('password').value;
 				status.innerHTML = 'Logging in...';
 				
-				const response = await (await fetch('https://renderlabs.cloud/api/v1/auth/login', {
+				const response = await (await window.fetchSecure('https://renderlabs.cloud/api/v1/auth/login', {
 					method: 'POST',
 					body: JSON.stringify({
 						email: (email.toLowerCase()),
@@ -23,7 +23,7 @@
 				})).json();
 				const token = JSON.parse(response.responseJson).token;
 				if (token) {
-					const hasAccount = await (await fetch('https://simplecircle.xyz/api/v1/auth/token', {
+					const hasAccount = await (await window.fetchSecure('https://simplecircle.xyz/api/v1/auth/token', {
 						method: 'POST',
 						body: JSON.stringify({
 							token,
@@ -35,7 +35,7 @@
 						window.location.href = '/';
 					}
 					else {
-						const accountCreated = await (await fetch('https://simplecircle.xyz/api/v1/auth/createUser', {
+						const accountCreated = await (await window.fetchSecure('https://simplecircle.xyz/api/v1/auth/createUser', {
 							method: 'POST',
 							body: JSON.stringify({
 								token

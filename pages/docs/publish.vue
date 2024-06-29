@@ -1,24 +1,22 @@
 <template>
-	<transition name="page" mode="out-in">
-		<div class="interface">
-			<h2>Publish Document</h2>
-			<form @submit.prevent="publishDocument">
-				<input v-model="publishForm.name" placeholder="Name" required /><br>
+	<div class="interface">
+		<h2>Publish Document</h2>
+		<form @submit.prevent="publishDocument">
+			<input v-model="publishForm.name" placeholder="Name" required /><br>
 
-				<input v-model="publishForm.description" placeholder="Description" required /><br>
+			<input v-model="publishForm.description" placeholder="Description" required /><br>
 
-				<TagEditor v-model="publishForm.tags" required /><br>
+			<TagEditor v-model="publishForm.tags" required /><br>
 
-				<input v-model="publishForm.URI" placeholder="URI" required /><br>
-				<div class="ql-editor" id="viewer" />
-				<QuillEditor v-model="publishForm.content" /><br>
+			<input v-model="publishForm.URI" placeholder="URI" required /><br>
+			<div class="ql-editor" id="viewer" />
+			<QuillEditor v-model="publishForm.content" /><br>
 
-				<button type="submit">Publish</button>
-				<p id="status"></p>
-				<p>You will need to own a <nuxt-link to="/docs/namespace">namespace</nuxt-link> to publish.</p>
-			</form>
-		</div>
-	</transition>
+			<button type="submit">Publish</button>
+			<p id="status"></p>
+			<p>You will need to own a <nuxt-link to="/docs/namespace">namespace</nuxt-link> to publish.</p>
+		</form>
+	</div>
 </template>
 
 <script>
@@ -77,7 +75,7 @@ export default {
 					formData[item] = this.publishForm[item];
 				}
 				console.log(JSON.stringify(formData))
-				const response = await fetch("https://simplecircle.xyz/api/v1/docs/publish", {
+				const response = await window.fetchSecure("https://simplecircle.xyz/api/v1/docs/publish", {
 					method: "POST",
 					body: JSON.stringify(formData)
 				});
